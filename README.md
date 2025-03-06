@@ -2,17 +2,10 @@
 
 ViewMate is a lightweight and efficient file viewer that supports multiple file formats, including TXT, LRC, CSV, and DAT.
 
-## Features
+## Supported Formats
+txt,lrc,csv,dat,py,html,css
 
-**- TXT Support:** Reads and displays plain text files line by line.
-
-**- LRC Support:** Loads and prints LRC (lyrics) files with proper encoding.
-
-**- CSV Support:** Parses and displays CSV files in a structured format.
-
-**- DAT Support:** Tries to unpickle data; if unsuccessful, reads as raw binary and attempts decoding.
-
-*More Coming Next Update*
+*more coming soon*
 
 
 ## Installation & Usage
