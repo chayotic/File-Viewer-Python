@@ -1,5 +1,5 @@
 #ViewMate File Reader
-#supports txt,lrc,csv,dat
+#supports txt,lrc,csv,dat,py
 import termcolor
 from termcolor import colored
 import os
@@ -9,6 +9,7 @@ import csv
 def load_txt(path):
     try:
         with open(path,"r") as file:
+            print(colored("File Found!","green",attrs=["bold"]))
             for line in file:
                 print(line.strip())
     except FileNotFoundError:
@@ -19,6 +20,7 @@ def load_txt(path):
 def load_lrc(path):
     try:
         with open(path,"r",encoding="utf-8") as file:
+            print(colored("File Found!","green",attrs=["bold"]))
             for line in file:
                 print(line.strip())
     except FileNotFoundError:
@@ -30,6 +32,7 @@ def load_csv(path):
         try:
             with open(path,"r") as file:
                 f = csv.reader(file)
+                print(colored("File Found!","green",attrs=["bold"]))
                 for row in f:
                     print(row)
         except FileNotFoundError:
@@ -37,9 +40,21 @@ def load_csv(path):
         except Exception as e:
             print(f"an error occured: {e}")
             
+def load_py(path):
+    try:
+        with open(path,"r",encoding="utf-8") as file:
+            contents = file.read()
+            print(colored("File Found!","green",attrs=["bold"]))
+            print(contents)
+    except FileNotFoundError:
+        print(colored("File Not Found!","red",attrs=["bold"]))
+    except Exception as e:
+        print(f"an error occured: {e}")           
+            
 def load_dat(path):
             try:
                 with open(path,"rb") as file:
+                    print(colored("File Found!","green",attrs=["bold"]))
                     try:
                         data = pickle.load(file)
                         print(colored("Pickle File loaded sucessfully","green",attrs=["bold"]))
@@ -79,6 +94,8 @@ def load(path):
         load_csv(path)
     elif format == "dat":
         load_dat(path)
+    elif format == "py":
+        load_py(path)
     else:
         print(colored("Unsupported File Format!","red",attrs=["bold"]))
           
