@@ -1,26 +1,36 @@
-## ViewMate
+# ViewMate
 
-ViewMate is a lightweight and efficient file viewer that supports multiple file formats, including TXT, LRC, CSV, and DAT.
+ViewMate is a lightweight and efficient file viewer that supports multiple file formats.
 
-## Supported Formats
-txt,lrc,csv,dat,py,html,css
+## Supported Formats  
+`txt`, `lrc`, `csv`, `dat`, `py`, `html`, `css`, `json`, `log`  
 
-*more coming soon*
+*More coming soon...*
 
+## Installation & Usage  
 
-## Installation & Usage
+### Prerequisites  
+Ensure you have **Python 3** installed. Additionally, install the required dependencies:
 
-Clone the repository and navigate to the project directory:
+```sh
+pip install termcolor beautifulsoup4
 ```
+
+### Clone the Repository  
+```sh
 git clone https://github.com/chayotic/ViewMate.git  
 cd ViewMate  
+```
+
+### Run the Application  
+```sh
 python viewmate.py
 ```
 
-### License
+## License  
 
-This project is licensed under the MIT Licence.
+This project is licensed under the **MIT License**.
 
-### Author
+## Author  
 
-Developed by [chayotic](https://github.com/chayotic/)
+Developed by [chayotic](https://github.com/chayotic/).
