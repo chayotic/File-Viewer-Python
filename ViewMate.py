@@ -1,5 +1,5 @@
 #ViewMate File Reader
-#supports txt,lrc,csv,dat,py,html,css
+#supports txt,lrc,csv,dat,py,html,css,json,log
 import termcolor
 from termcolor import colored
 import os
@@ -7,6 +7,7 @@ import pickle
 import csv
 import bs4
 from bs4 import BeautifulSoup
+import json
 
 def load_txt(path):
     try:
@@ -17,7 +18,7 @@ def load_txt(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(f"an error occured: {e}")
+        print(colored(f"an error occured: {e}","red",attrs=["bold"]))
 
 def load_lrc(path):
     try:
@@ -28,11 +29,11 @@ def load_lrc(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(f"an error occured: {e}")
+        print(colored(f"an error occured: {e}","red",attrs=["bold"]))
         
 def load_csv(path):
         try:
-            with open(path,"r") as file:
+            with open(path,"r",encoding="utf-8") as file:
                 f = csv.reader(file)
                 print(colored("File Found!","green",attrs=["bold"]))
                 for row in f:
@@ -40,7 +41,7 @@ def load_csv(path):
         except FileNotFoundError:
             print(colored("File Not Found!","red",attrs=["bold"]))
         except Exception as e:
-            print(f"an error occured: {e}")
+            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
             
 def load_py(path):
     try:
@@ -51,7 +52,7 @@ def load_py(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(f"an error occured: {e}")           
+        print(colored(f"an error occured: {e}","red",attrs=["bold"]))        
             
 def load_dat(path):
             try:
@@ -74,24 +75,60 @@ def load_dat(path):
                         print(colored("trying to decode text...","yellow",attrs=["bold"]))
                         try:
                             text = data.decode("utf-8")
-                            print(colored(f"decided text: \n{text}","yellow"))
+                            print(colored(f"decoded text: \n{text}","yellow"))
                         except UnicodeDecodeError:
                             print(colored("File is not valid utf-8 text!","red",attrs=["bold"]))
             except FileNotFoundError:
                 print(colored("File Not Found!","red",attrs=["bold"]))
             except Exception as e:
-                print(f"an error occured: {e}")
+                print(colored(f"an error occured: {e}","red",attrs=["bold"]))
                 
 def load_html(path):
-    with open(path,"r",encoding="utf-8") as file:
-        soup = BeautifulSoup(file,"html.parser")
-        print(soup.prettify())
+    try:
+        with open(path,"r",encoding="utf-8") as file:
+            soup = BeautifulSoup(file,"html.parser")
+            print(soup.prettify())
+    except FileNotFoundError:
+        print(colored("File Not Found!","red",attrs=["bold"]))
+    except Exception as e:
+            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+        
         
 def load_css(path):
-    with open(path,"r",encoding="utf-8") as file:
-        content=file.read()
-        print(content)
+    try:
+        with open(path,"r",encoding="utf-8") as file:
+            content=file.read()
+            print(content)
+    except FileNotFoundError:
+        print(colored("File Not Found!","red",attrs=["bold"])) 
+    except Exception as e:
+            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
 
+def load_json(path):
+    try:
+        with open(path,"r",encoding="utf-8") as file:
+            data = json.load(file)
+            print(data)
+    except FileNotFoundError:
+        print(colored("File Not Found!","red",attrs=["bold"]))
+    except json.JSONDecodeError:
+        print(colored("invalid JSON Format!","red",attrs=["bold"]))
+    except Exception as e:
+            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            
+def load_log(path):
+        try:
+            with open(path,"r",encoding="utf-8") as file:
+                print(colored("File Found!","green",attrs=["bold"]))
+                for line in file:
+                    print(line.strip())
+        except FileNotFoundError:
+            print(colored("File Not Found!","red",attrs=["bold"]))
+        except UnicodeDecodeError:
+            print(colored("Error: File encoding is not UTF-8!","red",attrs=["bold"]))
+        except Exception as e:
+            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+        
 def load(path):
     parts = path.split(".")
     if len(parts) > 1:
@@ -112,6 +149,10 @@ def load(path):
         load_html(path)
     elif format == "css":
         load_css(path)
+    elif format == "json":
+        load_json(path)
+    elif format == "log":
+        load_log(path)
     else:
         print(colored("Unsupported File Format!","red",attrs=["bold"]))
           
