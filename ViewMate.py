@@ -1,10 +1,12 @@
 #ViewMate File Reader
-#supports txt,lrc,csv,dat,py
+#supports txt,lrc,csv,dat,py,html,css
 import termcolor
 from termcolor import colored
 import os
 import pickle
 import csv
+import bs4
+from bs4 import BeautifulSoup
 
 def load_txt(path):
     try:
@@ -79,6 +81,16 @@ def load_dat(path):
                 print(colored("File Not Found!","red",attrs=["bold"]))
             except Exception as e:
                 print(f"an error occured: {e}")
+                
+def load_html(path):
+    with open(path,"r",encoding="utf-8") as file:
+        soup = BeautifulSoup(file,"html.parser")
+        print(soup.prettify())
+        
+def load_css(path):
+    with open(path,"r",encoding="utf-8") as file:
+        content=file.read()
+        print(content)
 
 def load(path):
     parts = path.split(".")
@@ -96,6 +108,10 @@ def load(path):
         load_dat(path)
     elif format == "py":
         load_py(path)
+    elif format == "html":
+        load_html(path)
+    elif format == "css":
+        load_css(path)
     else:
         print(colored("Unsupported File Format!","red",attrs=["bold"]))
           
