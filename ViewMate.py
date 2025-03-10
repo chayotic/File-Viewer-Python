@@ -135,24 +135,11 @@ def load(path):
         format = parts[-1].lower()
     else:
         format = ""
-    if format == "txt":
-        load_txt(path)
-    elif format == "lrc":
-        load_lrc(path)
-    elif format == "csv":
-        load_csv(path)
-    elif format == "dat":
-        load_dat(path)
-    elif format == "py":
-        load_py(path)
-    elif format == "html":
-        load_html(path)
-    elif format == "css":
-        load_css(path)
-    elif format == "json":
-        load_json(path)
-    elif format == "log":
-        load_log(path)
+        print(colored("Please Provide a file with a format!","yellow",attrs=["bold"]))
+
+    function_name = "load_" + format
+    if function_name in globals():
+        globals()[function_name](file_path) #calls function as load_{format}
     else:
         print(colored("Unsupported File Format!","red",attrs=["bold"]))
           
