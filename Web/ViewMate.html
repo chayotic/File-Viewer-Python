@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Reader</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #141318;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: #c1bdc6;
+            flex-direction: column;
+            padding-top: 150px;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #c1bdc6;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #5a575f;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 350px;
+        }
+
+        .drop-zone {
+            width: 350px;
+            height: 150px;
+            margin-bottom: 20px;
+            background-color: #141318;
+            border: 2px dashed #5a575f;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card {
+            width: 310px;
+            background-color: #141318;
+            margin-bottom: 20px;
+            border: 2px solid #5a575f;
+            border-radius: 20px;
+            padding: 20px;
+            display: none;
+            overflow: auto;
+            max-height: 500px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .card pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .file-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .socials-text {
+            font-size: 0.9rem;
+            color: #a9a6b0;
+            margin-bottom: 5px;
+        }
+
+        .github-link {
+            text-decoration: none;
+            color: #5a575f;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .github-link:hover {
+            color: #483f76;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">ViewMate</div>
+    <div class="description">
+        Upload or drag & drop a file to view its content. Supported file types: .txt, .json, .csv, and images.
+    </div>
+    <div>
+        <div class="drop-zone" id="dropZone">
+            <p>Drag & drop a file here or click to upload</p>
+        </div>
+        <div class="card" id="card">
+            <p class="file-name" id="fileName"></p>
+            <div id="fileContent"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="socials-text">Links</p>
+        <a class="github-link" href="https://github.com/chayotic/" target="_blank">GitHub</a>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const card = document.getElementById('card');
+        const fileContent = document.getElementById('fileContent');
+        const fileName = document.getElementById('fileName');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                readFile(file);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    readFile(file);
+                }
+            };
+            fileInput.click();
+        });
+
+        function readFile(file) {
+            fileName.textContent = `File: ${file.name}`;
+            const fileType = file.type;
+
+            if (fileType.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileContent.innerHTML = `<img src="${e.target.result}">`;
+                    card.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else if (fileType.startsWith('text/') || fileType === 'application/json' || fileType === 'text/csv') {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileContent.innerHTML = `<pre>${e.target.result}</pre>`;
+                    card.style.display = 'block';
+                };
+                reader.readAsText(file);
+            } else {
+                fileContent.textContent = 'Unsupported file type.';
+                card.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+  </html>
