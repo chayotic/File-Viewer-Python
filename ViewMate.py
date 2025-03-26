@@ -1,5 +1,5 @@
 #ViewMate File Reader
-#supports txt,lrc,csv,dat,py,html,css,json,log
+#supports txt,lrc,csv,dat,py,html,css,json
 import termcolor
 from termcolor import colored
 import os
@@ -129,6 +129,7 @@ def load_log(path):
         except Exception as e:
             print(colored(f"an error occured: {e}","red",attrs=["bold"]))
         
+        
 def load(path):
     parts = path.split(".")
     if len(parts) > 1:
@@ -136,13 +137,12 @@ def load(path):
     else:
         format = ""
         print(colored("Please Provide a file with a format!","yellow",attrs=["bold"]))
-
     function_name = "load_" + format
     if function_name in globals():
         globals()[function_name](file_path) #calls function as load_{format}
     else:
-        print(colored("Unsupported File Format!","red",attrs=["bold"]))
-          
+        print(colored("Unsupported Format!","yellow",attrs=["bold"]))      
+           
 file_path = input(colored("Enter File Path: ","yellow",attrs=["bold"]))
 print()
 load(file_path)
