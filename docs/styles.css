@@ -1,0 +1,102 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #141318;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #c1bdc6;
+    flex-direction: column;
+    padding-top: 150px;
+}
+
+/* Title & Description */
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #c1bdc6;
+}
+
+.description {
+    font-size: 1rem;
+    color: #5a575f;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 350px;
+}
+
+/* Drop Zone */
+.drop-zone {
+    width: 350px;
+    height: 150px;
+    margin-bottom: 20px;
+    background-color: #141318;
+    border: 2px dashed #5a575f;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+/* File Display Card */
+.card {
+    width: 310px;
+    background-color: #141318;
+    margin-bottom: 20px;
+    border: 2px solid #5a575f;
+    border-radius: 20px;
+    padding: 20px;
+    display: none;
+    overflow: auto;
+    max-height: 500px;
+    text-align: center;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.card pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* File Name */
+.file-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.socials-text {
+    font-size: 0.9rem;
+    color: #a9a6b0;
+    margin-bottom: 5px;
+}
+
+.github-link {
+    text-decoration: none;
+    color: #5a575f;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.github-link:hover {
+    color: #483f76;
+}

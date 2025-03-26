@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewMate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="title">ViewMate</div>
+    <div class="description">
+        Upload or drag & drop a file to view its content. Supported file types: .txt, .json, .csv, and images.
+    </div>
+    <div>
+        <div class="drop-zone" id="dropZone">
+            <p>Drag & drop a file here or click to upload</p>
+        </div>
+        <div class="card" id="card">
+            <p class="file-name" id="fileName"></p>
+            <div id="fileContent"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="socials-text">Links</p>
+        <a class="github-link" href="https://github.com/chayotic/" target="_blank">GitHub</a>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const card = document.getElementById('card');
+        const fileContent = document.getElementById('fileContent');
+        const fileName = document.getElementById('fileName');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                readFile(file);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    readFile(file);
+                }
+            };
+            fileInput.click();
+        });
+
+        function readFile(file) {
+            fileName.textContent = `File: ${file.name}`;
+            const fileType = file.type;
+
+            if (fileType.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileContent.innerHTML = `<img src="${e.target.result}">`;
+                    card.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else if (fileType.startsWith('text/') || fileType === 'application/json' || fileType === 'text/csv') {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileContent.innerHTML = `<pre>${e.target.result}</pre>`;
+                    card.style.display = 'block';
+                };
+                reader.readAsText(file);
+            } else {
+                fileContent.textContent = 'Unsupported file type.';
+                card.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
