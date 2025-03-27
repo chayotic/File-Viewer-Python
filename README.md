@@ -7,6 +7,9 @@ ViewMate is a lightweight and efficient file viewer that supports multiple file 
 
 *More coming soon...*
 
+## Website
+A simple website design was made which can open few formats including images.
+
 ## Installation & Usage  
 
 ### Prerequisites  
