@@ -18,7 +18,7 @@ def load_txt(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+        print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
 
 def load_lrc(path):
     try:
@@ -29,7 +29,7 @@ def load_lrc(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+        print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
         
 def load_csv(path):
         try:
@@ -41,7 +41,7 @@ def load_csv(path):
         except FileNotFoundError:
             print(colored("File Not Found!","red",attrs=["bold"]))
         except Exception as e:
-            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
             
 def load_py(path):
     try:
@@ -52,7 +52,7 @@ def load_py(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-        print(colored(f"an error occured: {e}","red",attrs=["bold"]))        
+        print(colored(f"an error occurred: {e}","red",attrs=["bold"]))        
             
 def load_dat(path):
             try:
@@ -60,7 +60,7 @@ def load_dat(path):
                     print(colored("File Found!","green",attrs=["bold"]))
                     try:
                         data = pickle.load(file)
-                        print(colored("Pickle File loaded sucessfully","green",attrs=["bold"]))
+                        print(colored("Pickle File loaded successfully","green",attrs=["bold"]))
                         if isinstance(data,(list,tuple)):
                             for item in data:
                                 print(item)
@@ -69,7 +69,7 @@ def load_dat(path):
                     except pickle.UnpicklingError:
                         file.seek(0)
                         data = file.read()
-                        print(colored(f"binary file loaded sucessfully {len(data)}bytes","green",attrs=["bold"]))
+                        print(colored(f"binary file loaded successfully {len(data)}bytes","green",attrs=["bold"]))
                         print(data)
                         print()
                         print(colored("trying to decode text...","yellow",attrs=["bold"]))
@@ -81,7 +81,7 @@ def load_dat(path):
             except FileNotFoundError:
                 print(colored("File Not Found!","red",attrs=["bold"]))
             except Exception as e:
-                print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+                print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
                 
 def load_html(path):
     try:
@@ -91,7 +91,7 @@ def load_html(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"]))
     except Exception as e:
-            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
         
         
 def load_css(path):
@@ -102,7 +102,7 @@ def load_css(path):
     except FileNotFoundError:
         print(colored("File Not Found!","red",attrs=["bold"])) 
     except Exception as e:
-            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
 
 def load_json(path):
     try:
@@ -114,7 +114,7 @@ def load_json(path):
     except json.JSONDecodeError:
         print(colored("invalid JSON Format!","red",attrs=["bold"]))
     except Exception as e:
-            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
             
 def load_log(path):
         try:
@@ -127,7 +127,7 @@ def load_log(path):
         except UnicodeDecodeError:
             print(colored("Error: File encoding is not UTF-8!","red",attrs=["bold"]))
         except Exception as e:
-            print(colored(f"an error occured: {e}","red",attrs=["bold"]))
+            print(colored(f"an error occurred: {e}","red",attrs=["bold"]))
         
         
 def load(path):
