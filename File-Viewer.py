@@ -1,4 +1,4 @@
-#ViewMate File Reader
+#File Viewer
 #supports txt,lrc,csv,dat,py,html,css,json,log
 import termcolor
 from termcolor import colored
